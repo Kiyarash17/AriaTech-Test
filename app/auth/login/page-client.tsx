@@ -22,7 +22,7 @@ export default function PageClient() {
           </h1>
           <p className="text-white mt-1">Welcome to login page👋</p>
           <div className="flex justify-center lg:justify-start mt-6">
-            <Link href="#" className={buttonVariants({ variant: "secondary" })}>
+            <Link href="/" className={buttonVariants({ variant: "secondary" })}>
               Back Home
             </Link>
           </div>
