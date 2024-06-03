@@ -39,26 +39,12 @@ export default function PageClient() {
     },
   });
 
-  //   const handleLogin = async (mobile: string, password: string) => {
-  //     try {
-  //       const data = await login(query.mobile, query.password);
-  //       console.log(data);
-
-  //       // Save the token in localStorage or context
-  //       localStorage.setItem("token", data.token);
-  //       //   router.push("/dashboard");
-  //     } catch (err) {
-  //       //   setError("Invalid login credentials");
-  //     }
-  //   };
-
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     setLoading(true);
 
     const respData = await login(data.mobile, data.password)
       .then((response) => {
         setLoading(false);
-        console.log(response);
         Cookies.set("token", response.token, {
           secure: true,
           expires: 360,
@@ -73,40 +59,6 @@ export default function PageClient() {
         });
       });
   }
-
-  // clientApi.v1
-  //   .v1AuthLoginCreate(data, { cache: "no-store", secure: false })
-  //   .then((resp) => {
-  //     props.setQuery({ ...props.query, loading: false });
-  //     if (resp.data?.is_email_verified === false) {
-  //       props.setQuery({ ...props.query, stage: 2, email: data.email });
-  //     } else {
-  //       Cookies.set("JWTAccess", resp.data?.access, {
-  //         secure: true,
-  //         expires: 360,
-  //       });
-  //       Cookies.set("JWTRefresh", resp.data?.refresh, {
-  //         secure: true,
-  //         expires: 360,
-  //       });
-
-  //       toast({
-  //         title: "You have successfully logged in",
-  //         variant: "default",
-  //       });
-
-  //       router.push("/");
-  //     }
-  //   })
-  //   .catch((err) => {
-  //     setLoading(false);
-  //     toast({
-  //       title: (Object.values(err.error) as any)[0][0],
-  //       description: "There was a problem with your request.",
-  //       variant: "destructive",
-  //     });
-  //   });
-  //   }
 
   return (
     <div className="h-screen flex">

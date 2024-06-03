@@ -19,14 +19,17 @@ export default function PageClient() {
           </p>
           <div className="flex gap-2 w-full">
             <Link
-            href="/auth/login"
+              href="/auth/login"
               className={`${buttonVariants({ variant: "default" })} flex-1`}
             >
               Login
             </Link>
-            <Button variant="outline" className="flex-1">
-              Start
-            </Button>
+            <Link
+              href="/users"
+              className={`${buttonVariants({ variant: "outline" })} flex-1`}
+            >
+              Users
+            </Link>
           </div>
         </div>
         <div className="flex-1 flex justify-center items-center">
