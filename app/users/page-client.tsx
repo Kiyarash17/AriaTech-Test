@@ -16,7 +16,7 @@ export default function PageClient(props: Props) {
   const [searchQuery, setSearchQuery] = useState("");
 
   return (
-    <div className="container py-5 space-y-10">
+    <>
       <div className="flex w-full sm:w-1/2 mx-auto justify-center">
         <Input
           type="text"
@@ -34,6 +34,6 @@ export default function PageClient(props: Props) {
             <UserCard data={user} key={index} />
           ))}
       </div>
-    </div>
+    </>
   );
 }
