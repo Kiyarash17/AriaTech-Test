@@ -1,7 +1,113 @@
-import { Button } from "@/components/ui/button";
+"use client";
+
+import { Api, login } from "@/api/Api";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { toast } from "@/components/ui/toast/use-toast";
+import Link from "next/link";
+import { useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { ReloadIcon } from "@radix-ui/react-icons";
+import Cookies from "js-cookie";
+
+const FormSchema = z.object({
+  mobile: z.string().min(11, {
+    message: "Please enter your Mobile",
+  }),
+  password: z.string().min(7, {
+    message: "Password should be more than 7 character",
+  }),
+});
 
 export default function PageClient() {
+  const [loading, setLoading] = useState(false);
+  const form = useForm<z.infer<typeof FormSchema>>({
+    resolver: zodResolver(FormSchema),
+    defaultValues: {
+      mobile: "",
+      password: "",
+    },
+  });
+
+  //   const handleLogin = async (mobile: string, password: string) => {
+  //     try {
+  //       const data = await login(query.mobile, query.password);
+  //       console.log(data);
+
+  //       // Save the token in localStorage or context
+  //       localStorage.setItem("token", data.token);
+  //       //   router.push("/dashboard");
+  //     } catch (err) {
+  //       //   setError("Invalid login credentials");
+  //     }
+  //   };
+
+  async function onSubmit(data: z.infer<typeof FormSchema>) {
+    setLoading(true);
+
+    const respData = await login(data.mobile, data.password)
+      .then((response) => {
+        setLoading(false);
+        console.log(response);
+        Cookies.set("token", response.token, {
+          secure: true,
+          expires: 360,
+        });
+      })
+      .catch((err) => {
+        setLoading(false);
+        toast({
+          title: "Uh oh! Something went wrong.",
+          description: "There was a problem with your request.",
+          variant: "destructive",
+        });
+      });
+  }
+
+  // clientApi.v1
+  //   .v1AuthLoginCreate(data, { cache: "no-store", secure: false })
+  //   .then((resp) => {
+  //     props.setQuery({ ...props.query, loading: false });
+  //     if (resp.data?.is_email_verified === false) {
+  //       props.setQuery({ ...props.query, stage: 2, email: data.email });
+  //     } else {
+  //       Cookies.set("JWTAccess", resp.data?.access, {
+  //         secure: true,
+  //         expires: 360,
+  //       });
+  //       Cookies.set("JWTRefresh", resp.data?.refresh, {
+  //         secure: true,
+  //         expires: 360,
+  //       });
+
+  //       toast({
+  //         title: "You have successfully logged in",
+  //         variant: "default",
+  //       });
+
+  //       router.push("/");
+  //     }
+  //   })
+  //   .catch((err) => {
+  //     setLoading(false);
+  //     toast({
+  //       title: (Object.values(err.error) as any)[0][0],
+  //       description: "There was a problem with your request.",
+  //       variant: "destructive",
+  //     });
+  //   });
+  //   }
+
   return (
     <div className="h-screen flex">
       <div
@@ -21,47 +127,71 @@ export default function PageClient() {
           </h1>
           <p className="text-white mt-1">Welcome to login page👋</p>
           <div className="flex justify-center lg:justify-start mt-6">
-            <a
-              href="#"
-              className="hover:bg-indigo-700 hover:text-white hover:-translate-y-1 transition-all duration-500 bg-white text-indigo-800 mt-4 px-4 py-2 rounded-2xl font-bold mb-2"
-            >
-              Get Started
-            </a>
+            <Link href="/" className={buttonVariants({ variant: "secondary" })}>
+              Back Home
+            </Link>
           </div>
         </div>
       </div>
       <div className="flex w-full lg:w-1/2 justify-center items-center bg-white space-y-8">
         <div className="w-full px-8 md:px-32 lg:px-24">
-          <form className="bg-white rounded-md shadow-2xl p-5">
-            <h1 className="text-gray-800 font-bold text-2xl mb-1">
-              Hello Again!
-            </h1>
-            <p className="text-sm font-normal text-gray-600 mb-8">
-              Welcome Back
-            </p>
+          <div className="bg-white rounded-md shadow-2xl p-5 space-y-4">
+            <h1 className="font-bold text-2xl ">Hello Again!</h1>
+            <p className="text-sm font-normal text-gray-600">Welcome Back</p>
 
-            <div className="space-y-3">
-              <Input placeholder="Email Address" type="email" />
-              <Input placeholder="Password" type="password" />
-
-              <Button variant="default" className="w-full !mt-7">
-                Login
-              </Button>
-            </div>
-
-            <div className="flex justify-between mt-4">
-              <span className="text-sm ml-2 hover:text-blue-500 cursor-pointer hover:-translate-y-1 duration-500 transition-all">
-                Forgot Password ?
-              </span>
-
-              <a
-                href="#"
-                className="text-sm ml-2 hover:text-blue-500 cursor-pointer hover:-translate-y-1 duration-500 transition-all"
+            <Form {...form}>
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="w-full space-y-6"
               >
+                <FormField
+                  control={form.control}
+                  name="mobile"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="font-bold">Mobile</FormLabel>
+                      <FormControl>
+                        <Input {...field} disabled={loading} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="password"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="font-bold">Password</FormLabel>
+                      <FormControl>
+                        <Input {...field} disabled={loading} type="password" />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <Button
+                  type="submit"
+                  className="rounded-3xl gap-2 px-10 py-6 w-full bg-black text-white hover:bg-gray-900 items-center"
+                  disabled={loading}
+                >
+                  Sign In
+                  {loading && (
+                    <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+                  )}
+                </Button>
+              </form>
+            </Form>
+
+            <div className="flex justify-between items-center flex-wrap">
+              <Link href="#" className={buttonVariants({ variant: "ghost" })}>
+                Forgot Password ?
+              </Link>
+              <Link href="#" className={buttonVariants({ variant: "ghost" })}>
                 Don&apos;t have an account yet?
-              </a>
+              </Link>
             </div>
-          </form>
+          </div>
         </div>
       </div>
     </div>
