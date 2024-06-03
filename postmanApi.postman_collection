@@ -1,0 +1,581 @@
+{
+	"info": {
+		"_postman_id": "ca425dab-be57-49fb-91c7-6ed9920c1ea8",
+		"name": "Agahi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21859417",
+		"_collection_link": "https://solar-shadow-619161.postman.co/workspace/Team-Workspace~40cb682c-7d7c-4dd3-84ba-e7943c59222a/collection/21859417-ca425dab-be57-49fb-91c7-6ed9920c1ea8?action=share&source=collection_link&creator=21859417"
+	},
+	"item": [
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Auth",
+					"item": [
+						{
+							"name": "Login Via Mobile And Password",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "mobile",
+											"value": "09366842860",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "ali@1234!",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/login",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Auth User",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/user",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"user"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "User",
+					"item": [
+						{
+							"name": "Index ( Searchable )",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/users",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"users"
+									],
+									"query": [
+										{
+											"key": "mobile",
+											"value": "Menu",
+											"disabled": true
+										},
+										{
+											"key": "first_name",
+											"value": "test",
+											"disabled": true
+										},
+										{
+											"key": "last_name",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "national_code",
+											"value": "124567890",
+											"disabled": true
+										},
+										{
+											"key": "email",
+											"value": "ali@gmail.com",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Store",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "status",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "type",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "first_name",
+											"value": "Ali",
+											"type": "text"
+										},
+										{
+											"key": "last_name",
+											"value": "Khoshkar",
+											"type": "text"
+										},
+										{
+											"key": "mobile",
+											"value": "09194911520",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "al1i@gmail.com",
+											"type": "text"
+										},
+										{
+											"key": "national_code",
+											"value": "0022447718",
+											"type": "text"
+										},
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/C:/Users/ariatech/Desktop/fake images/fake.png"
+										},
+										{
+											"key": "roles_ids[0]",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "roles_ids[1]",
+											"value": "2",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/users",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Show",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/users/4",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"users",
+										"4"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update ( PATCH METHOD ) Copy",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "status",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "type",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "first_name",
+											"value": "Ali",
+											"type": "text"
+										},
+										{
+											"key": "last_name",
+											"value": "Khoshkar",
+											"type": "text"
+										},
+										{
+											"key": "mobile",
+											"value": "09194911520",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "ali3@gmail.com",
+											"type": "text"
+										},
+										{
+											"key": "national_code",
+											"value": "0022447718",
+											"type": "text"
+										},
+										{
+											"key": "roles_ids[0]",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "roles_ids[1]",
+											"value": "2",
+											"type": "text"
+										},
+										{
+											"key": "_method",
+											"value": "PATCH",
+											"type": "text"
+										},
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/C:/Users/ariatech/Desktop/fake images/fake.png",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/users/5",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"users",
+										"5"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Destroy",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/users/3",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"users",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Restore",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/users/3/restore",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"users",
+										"3",
+										"restore"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Trashed ( Searchable )",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/users/trashed/index?mobile=0919491",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"users",
+										"trashed",
+										"index"
+									],
+									"query": [
+										{
+											"key": "mobile",
+											"value": "0919491"
+										},
+										{
+											"key": "first_name",
+											"value": "test",
+											"disabled": true
+										},
+										{
+											"key": "last_name",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "national_code",
+											"value": "124567890",
+											"disabled": true
+										},
+										{
+											"key": "email",
+											"value": "ali@gmail.com",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Force Destroy",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/users/3/force",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"users",
+										"3",
+										"force"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Status Update ( PATCH METHOD )",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "status",
+											"value": "2",
+											"type": "text"
+										},
+										{
+											"key": "_method",
+											"value": "PATCH",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/users/4/status",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"users",
+										"4",
+										"status"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Statuses",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/users/enums/statuses",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"users",
+										"enums",
+										"statuses"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Types",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/users/enums/types",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"users",
+										"enums",
+										"types"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
