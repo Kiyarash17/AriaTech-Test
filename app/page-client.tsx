@@ -2,12 +2,13 @@
 
 import Lottie from "react-lottie-player";
 import HeroSectionAnimation from "@/public/animations/hero-section.json";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function PageClient() {
   return (
     <>
-      <div className="flex flex-col sm:flex-row">
+      <div className="flex flex-col sm:flex-row min-h-screen justify-center">
         <div className="flex-1 flex flex-col justify-center gap-4">
           <h1>Welcome to AriaTech👋</h1>
           <p className="text-gray-600 text-sm">
@@ -17,11 +18,14 @@ export default function PageClient() {
             dicta. Cumque, id culpa!
           </p>
           <div className="flex gap-2 w-full">
-            <Button variant="default" className="flex-1">
-              Start
-            </Button>
+            <Link
+            href="/auth/login"
+              className={`${buttonVariants({ variant: "default" })} flex-1`}
+            >
+              Login
+            </Link>
             <Button variant="outline" className="flex-1">
-              Test
+              Start
             </Button>
           </div>
         </div>
